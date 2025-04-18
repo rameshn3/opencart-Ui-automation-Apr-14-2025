@@ -41,7 +41,6 @@ import org.testng.Assert;
  */
 
 public class WebDriverUtils{
-    private Logger log= LogManager.getLogger(WebDriverUtils.class.getName());
     Actions act;
     protected WebDriver driver;
     private JavaScriptUtils jsUtil;
@@ -751,7 +750,7 @@ public class WebDriverUtils{
         WebElement parentMenuElement = getElement(parentMenuLocator);
         act.moveToElement(parentMenuElement).perform();
         Thread.sleep(2000);
-        click(getElement(getByType(childMenu)));
+        click(getElement(childMenuLocator));
 
     }
     /**
