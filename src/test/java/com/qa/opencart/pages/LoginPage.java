@@ -37,7 +37,7 @@ WebDriverWait wait;
     @FindBy(css="#input-password")
     private WebElement passwordEditbox;
 
-    @FindBy(css="input[value='Login'][type='submit]")
+    @FindBy(css="input[value='Login']")
     private WebElement loginBtn;
 
     @FindBy(linkText="Forgotten Password")
@@ -95,16 +95,20 @@ WebDriverWait wait;
         type(passwordEditbox,pwd);
         ChainTestListener.log("click on login button...");
        clickOnLoginBtn();
-       return new MyAccountPage();
+       return new MyAccountPage(driver);
     }
 
     @Step("Get Error Message")
-    public String getErrorMessage(){
+    public String getErrorMessage() throws InterruptedException{
         return getText(emptyCredsErrorMessage);
     }
     @Step("click on forgot password link")
     public void clickOnForgotPasswordLink() throws InterruptedException{
         ChainTestListener.log("click on ForgotPasswordLink..");
         click(forgottenPasswordLink);
+    }
+
+    public void navigateToHomePage() throws InterruptedException{
+        click(homeIcon);
     }
 }

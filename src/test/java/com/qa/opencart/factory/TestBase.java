@@ -19,7 +19,7 @@ import com.qa.opencart.pages.LogoutPage;
 import com.qa.opencart.pages.MyAccountPage;
 import com.qa.opencart.pages.ProductDetailsPage;
 import com.qa.opencart.pages.RegistrationPage;
-import com.qa.opencart.pages.ResultsPage;
+import com.qa.opencart.pages.SearchResultsPage;
 import com.qa.opencart.utilities.Constants;
 
 import static com.qa.opencart.factory.WebDriverFactory.readPropertyValue;
@@ -30,7 +30,7 @@ public class TestBase {
     public LoginPage loginPg;
     public LogoutPage logoutPg;
     public MyAccountPage myaccountPg;
-    public ResultsPage resultPg;
+    public SearchResultsPage resultPg;
     public ProductDetailsPage productDetailPg;
     public static WebDriver driver;
     public ResourceBundle rb;// to read config.properties

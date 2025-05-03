@@ -56,6 +56,12 @@ WebDriverWait wait;
     @FindBy(xpath="//input[@placeholder='Search']")
     private WebElement searchEditbox;
 
+    @FindBy(xpath="//h1[normalize-space()='My Account Information']")
+    private WebElement myAccountInformationHeader;
+
+    @FindBy(xpath="//a[normalize-space()='Back']")
+    private WebElement backBtn;
+
     @FindBy(xpath="//button[@class='btn btn-default btn-lg']")
     private WebElement searchTorchIcon;
     @Step("Get My Account Page Title")
@@ -71,6 +77,12 @@ WebDriverWait wait;
     public boolean isAccountPageDisplayed(){
         return myAccountHeader.isDisplayed();
     }
+
+    @Step("check if my account information header is displayed")
+    public boolean isMyAccountInformationHeaderDisplayed(){
+        return myAccountInformationHeader.isDisplayed();
+    }
+
     @Step("check my account breadcrumb is displayed")
     public boolean isAccountBreadCrumbExits(){
         return accountBreadCrumb.isDisplayed();
@@ -78,6 +90,11 @@ WebDriverWait wait;
     @Step("click on Edit Account information link")
     public void clickEditAccountInfoLink() throws InterruptedException{
         click(editAccountInfoLink);
+    }
+
+    @Step("click on back button in My Edit Account information page")
+    public void clickBackButtonInEditAccountInfoPage() throws InterruptedException{
+        click(backBtn);
     }
 
     @Step("click on change password link")
