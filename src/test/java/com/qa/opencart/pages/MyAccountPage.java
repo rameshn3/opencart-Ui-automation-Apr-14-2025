@@ -59,6 +59,8 @@ WebDriverWait wait;
     @FindBy(xpath="//h1[normalize-space()='My Account Information']")
     private WebElement myAccountInformationHeader;
 
+    @FindBy(xpath="//h1[normalize-space()='Change Password']")
+    private WebElement changePasswordHeader;
     @FindBy(xpath="//a[normalize-space()='Back']")
     private WebElement backBtn;
 
@@ -68,6 +70,12 @@ WebDriverWait wait;
     public String getMyAccountPageTitle(){
         return getTitle();
     }
+
+    @Step("Verify Change password header")
+  public boolean isChangePasswordHeaderDisplayed(){
+      return changePasswordHeader.isDisplayed();
+    }
+
 
     @Step("Get My Account Page url")
     public String getMyAccountPageUrl(){
@@ -134,7 +142,7 @@ WebDriverWait wait;
     }
 
     @Step("Perform the search")
-    public void doSearch(String productName) throws InterruptedException{
+    public void doProductSearch(String productName) throws InterruptedException{
         ChainTestListener.log("perform the search for.."+productName);
         clearText(searchEditbox);
         type(searchEditbox,productName);

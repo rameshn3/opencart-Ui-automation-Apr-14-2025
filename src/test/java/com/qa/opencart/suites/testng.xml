@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="opencart-ui-automationtest">
+        <classes>
+            <class name="com.qa.opencart.testcases.HomePageTest">
+            </class>
+            <class name="com.qa.opencart.testcases.LoginPageTest">
+
+            </class>
+
+            <class name="com.qa.opencart.testcases.MyAccountPageTest">
+
+            </class>
+            <class name="com.qa.opencart.testcases.ProductDetailsPageTest">
+
+            </class>
+            <class name="com.qa.opencart.testcases.RegistrationPageTest">
+
+            </class>
+        </classes>
+    </test>
+</suite>
