@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -127,7 +126,7 @@ public class RegistrationPageTest extends TestBase{
     public void TC03_Verify_logout_Test() throws InterruptedException, IOException{
         ChainTestListener.log("TC03_Verify_logout_Test()");
         myaccountPg.doLogout();
-        logoutPg.waitForPageLoad(2000);
+        logoutPg.waitForPageLoad(1000);
         ChainTestListener.log(" verify logout page title");
         Assert.assertEquals(logoutPg.getTitle(),Constants.LOGOUT_PAGE_TITLE);
         ChainTestListener.log(" click continue in logout page");
