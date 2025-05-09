@@ -43,7 +43,7 @@ public class WebDriverFactory {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 //   chromeOptions.addArguments("--incognito");
                 //   chromeOptions.addArguments("disable-infobars");
-                chromeOptions.addArguments("--headless");
+               // chromeOptions.addArguments("--headless");
                 chromeOptions.addArguments("--disable-gpu"); // Optional, improves compatibility
                 chromeOptions.addArguments("--window-size=1920,1080");
                 chromeOptions.setAcceptInsecureCerts(true);

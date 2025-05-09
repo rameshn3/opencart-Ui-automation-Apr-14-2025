@@ -7,7 +7,9 @@ import com.qa.opencart.pages.*;
 import com.qa.opencart.utilities.Constants;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
 
@@ -20,7 +22,7 @@ public class MyAccountPageTest extends TestBase{
         loginPg = new LoginPage(driver);
         myaccountPg = new MyAccountPage(driver);
         logoutPg = new LogoutPage(driver);
-        resultPg = new SearchResultsPage(driver)
+        resultPg = new SearchResultsPage(driver);
         ChainTestListener.log("navigate to login page");
         homePg.navigateToLoginPage();
         loginPg.doLogin(WebDriverFactory.readPropertyValue("username"),WebDriverFactory.readPropertyValue("pwd"));
@@ -50,47 +52,60 @@ public class MyAccountPageTest extends TestBase{
 
     }
 
-    @Test(description="TC04 verify navigate to registration page from loginpage test")
-    public void TC04_verify_navigate_to_registration_page_from_loginpage_test() throws InterruptedException{
-        ChainTestListener.log("TC04 verify navigate to registration page from loginpage test");
-        loginPg.clickNewCustomerContinueBtn();
-        regPg.waitForPageLoad(1000);
-        ChainTestListener.log("Verify Registration page title");
-        Assert.assertEquals(regPg.getRegisterPageTitle(),Constants.REGISTRATION_PAGE_TITLE);
-        ChainTestListener.log("navigate back to login page");
-        regPg.clickOnLoginPageLink();
-    }
-
-
-    @Test(description="TC05 verify navigate to forgotpassword page from loginpage test",dependsOnMethods={"TC04_verify_navigate_to_registration_page_from_loginpage_test"})
-    public void TC05_verify_navigate_to_forgotpassword_page_test() throws InterruptedException{
-        ChainTestListener.log("TC05 verify navigate to forgotpassword page from loginpage test");
-       loginPg.clickOnForgotPasswordLink();
-        loginPg.waitForPageLoad(1000);
-        ChainTestListener.log("navigate back to home page");
-       driver.navigate().back();
-    }
-    @Test(description="TC06 verify empty credentials error message test")
-    public void TC06_verify_empty_credentials_error_message_test() throws InterruptedException{
-        ChainTestListener.log("TC06 verify empty credentials test");
-        loginPg.doLogin(" "," ");
-        loginPg.waitForPageLoad(1000);
-        ChainTestListener.log("verify empty credentials error message in login page");
-       Assert.assertTrue(loginPg.getErrorMessage().contains(Constants.EMPTY_CREDS_ERROR_MSG));
-    }
-
-    @Test(description="TC07 verify valid credentials test")
-    public void TC07_verify_valid_credentials_test() throws InterruptedException, IOException{
-        ChainTestListener.log("TC07 verify valid credentials test");
-        loginPg.doLogin(WebDriverFactory.readPropertyValue("username"),WebDriverFactory.readPropertyValue("pwd"));
+    @Test(description="TC04 verify navigate to Edit account information page")
+    public void TC04_verify_navigate_to_edit_account_information_page_test() throws InterruptedException{
+        ChainTestListener.log("TC04 verify navigate to Edit account information page");
+        myaccountPg.clickEditAccountInfoLink();
         myaccountPg.waitForPageLoad(1000);
-        ChainTestListener.log("verify my account page title");
+        ChainTestListener.log("Verify EditAccountInfo page");
+        Assert.assertTrue(myaccountPg.isMyAccountInformationHeaderDisplayed());
+        ChainTestListener.log("navigate back to my account page");
+        myaccountPg.clickBackButtonInEditAccountInfoPage();
+        myaccountPg.waitForPageLoad(1000);
+        ChainTestListener.log("Verify my account page title test");
         Assert.assertEquals(myaccountPg.getTitle(),Constants.MYACCOUNT_PAGE_TITLE);
     }
 
-    @Test(description="TC08 verify logout from my account page test",dependsOnMethods={"TC07_verify_valid_credentials_test"})
-    public void TC08_verify_logout_from_myaccountPage_test() throws InterruptedException, IOException{
-        ChainTestListener.log("TC08 verify logout from my account page test");
+
+    @Test(description="TC05 verify navigate to change password page")
+    public void TC05_verify_navigate_to_change_password_page_test() throws InterruptedException{
+        ChainTestListener.log("TC05 verify navigate to change password page");
+        myaccountPg.clickChangePasswordLink();
+        myaccountPg.waitForPageLoad(1000);
+        ChainTestListener.log("Verify change password page");
+        Assert.assertTrue(myaccountPg.isChangePasswordHeaderDisplayed());
+        ChainTestListener.log("navigate back to my account page");
+        myaccountPg.clickBackButtonInEditAccountInfoPage();
+        myaccountPg.waitForPageLoad(1000);
+        ChainTestListener.log("Verify my account page title test");
+        Assert.assertEquals(myaccountPg.getTitle(),Constants.MYACCOUNT_PAGE_TITLE);
+    }
+    @Test(description="TC06_Verify product search test",dataProvider="productTestData")
+    public void TC06_Verify_product_Search_Test(String productName) throws InterruptedException, IOException{
+        ChainTestListener.log("TC06_Verify_product_Search_Test()");
+        myaccountPg.doProductSearch(productName);
+        resultPg.waitForPageLoad(1000);
+        ChainTestListener.log("verify results page title");
+        SoftAssert sa = new SoftAssert();
+        sa.assertEquals(resultPg.getTitle(),"Search - "+productName);
+        sa.assertTrue(resultPg.getProductListSize()>0);
+        ChainTestListener.log("navigate back to my account page");
+        resultPg.navigateToMyAccountPage();
+        myaccountPg.waitForPageLoad(2000);
+        sa.assertAll();
+    }
+    @DataProvider
+    public Object[][] productTestData(){
+        return  new Object[][]{
+                {"MacBook"},
+                {"Apple Cinema 30\""},
+                {"Samsung"}
+        };
+    }
+
+    @Test(description="TC07 verify logout from my account page test",dependsOnMethods={"TC06_Verify_product_Search_Test"})
+    public void TC07_verify_logout_from_myaccountPage_test() throws InterruptedException, IOException{
+        ChainTestListener.log("TC07 verify logout from my account page test");
        myaccountPg.doLogout();
        ChainTestListener.log(("verify logout page exists or not"));
        Assert.assertTrue(logoutPg.isAccountLoggedOffMsgExists());

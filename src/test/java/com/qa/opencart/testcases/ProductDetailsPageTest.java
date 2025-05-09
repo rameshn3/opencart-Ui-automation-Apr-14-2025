@@ -59,7 +59,7 @@ public class ProductDetailsPageTest extends TestBase{
     public Object[][] productImageTestData(){
         return  new Object[][]{
                 {"MacBook","MacBook Air",4},
-                {"Apple","Apple Cinema 30",6},
+                {"Apple","Apple Cinema 30\"",6},
                 {"Samsung","Samsung SyncMaster 941BW",1}
         };
     }
