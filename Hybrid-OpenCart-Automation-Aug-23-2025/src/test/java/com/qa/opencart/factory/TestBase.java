@@ -24,7 +24,7 @@ public class TestBase {
     @Parameters({"browser"})
     @BeforeClass
     public void commonSetUp(@Optional("chrome") String browser) throws IOException {
-        // rb = ResourceBundle.getBundle("config");// Load config.properties
+      
         ChainTestListener.log("setting the driver");
         ChainPluginService.getInstance().addSystemInfo("Build#", "1.0");
         ChainPluginService.getInstance().addSystemInfo("Owner Name#", "Ramesh Ch");
