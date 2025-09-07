@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="DatadrivenTest">
+        <groups>
+            <run>
+                <exclude name="smoke"/>
+                <include name="regression"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="testngprograms.DatadrivenTest"/>
+            <class name ="testngprograms.ZKDemoTest"/>
+
+        </classes>
+    </test>
+</suite>
