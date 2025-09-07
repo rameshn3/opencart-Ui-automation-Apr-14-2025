@@ -30,7 +30,6 @@ public class ExcelUtils {
         fis=new FileInputStream(srcFile);
         log.debug("Load workbook");
         workbook=new XSSFWorkbook(fis);
-        //Load sheet- Here we are loading first sheetonly
         sheet= workbook.getSheet(sheetName);
         log.debug("fetch the row count");	//two d array declaration
         int rowCount=sheet.getLastRowNum();
