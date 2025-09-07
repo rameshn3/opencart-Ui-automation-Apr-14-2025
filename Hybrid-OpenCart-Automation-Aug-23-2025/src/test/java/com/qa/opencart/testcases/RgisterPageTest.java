@@ -47,7 +47,7 @@ public LoginPage loginPage;
     public void navigate_to_register_page_from_home_page_Test() throws InterruptedException{
         ChainTestListener.log("TC04_Verify_navigate_to_register_page_from_home_page_Test");
         homePage.navigateToRegisterPage();
-        registerPage.waitForPageLoad(1000);
+        registerPage.waitForPageLoad(2000);
         ChainTestListener.log("Verifyregister_page_title");
         Assert.assertEquals(registerPage.getRegisterPageTitle(),Constants.REGISTRATION_PAGE_TITLE);
 

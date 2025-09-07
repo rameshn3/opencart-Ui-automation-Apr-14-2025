@@ -117,7 +117,6 @@ public ProductDetailsPage productDetailsPage;
         logoutPage.clickContinueBtn();
         homePage.waitForPageLoad(1000);
         Assert.assertEquals(homePage.getHomePageTitle(),Constants.HOME_PAGE_TITLE);
-
     }
 
 }
